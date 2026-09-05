@@ -3,51 +3,33 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TaskFlow · Learning Log</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <title>Todo List · Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-    <!-- Paper grain / ruled-edge background is drawn in CSS, no markup needed -->
 
     <div class="app-container">
 
         <!-- ====== SIDEBAR ====== -->
-        <aside class="sidebar glass">
+        <aside class="sidebar">
             <div class="sidebar-brand">
-                <div class="brand-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                </div>
+                <div class="brand-icon">✓</div>
                 <span>TaskFlow</span>
-                <span class="brand-badge">v2</span>
             </div>
-
             <nav class="sidebar-nav">
                 <a href="#" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
                 <a href="#"><i class="fas fa-tasks"></i> My Tasks</a>
-                <a href="#"><i class="fas fa-calendar"></i> Calendar</a>
-                <a href="#"><i class="fas fa-chart-pie"></i> Analytics</a>
+                <a href="#"><i class="fas fa-calendar"></i> Schedule</a>
+                <a href="#"><i class="fas fa-chart-line"></i> Progress</a>
                 <a href="#"><i class="fas fa-cog"></i> Settings</a>
             </nav>
-
             <div class="sidebar-footer">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <div class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
-                </button>
-                <div class="user-profile">
-                    <div class="user-avatar">TF</div>
-                    <div class="user-info">
-                        <span class="user-name">Learner</span>
-                        <span class="user-email">learner@taskflow.app</span>
-                    </div>
                 </div>
+                <div class="user-avatar">CG</div>
             </div>
         </aside>
 
@@ -58,89 +40,71 @@
             <header class="main-header">
                 <div>
                     <h1>Learning Schedule</h1>
-                    <p class="header-sub">
-                        <i class="fas fa-calendar-check"></i> Stay on track · Day 8
-                    </p>
+                    <p class="header-sub"><i class="fas fa-calendar-check"></i> Stay on track · Day 8</p>
                 </div>
                 <div class="header-actions">
-                    <div class="date-badge glass" id="currentDate">
+                    <div class="date-badge" id="currentDate">
                         <i class="far fa-calendar-alt"></i>
                         <span></span>
                     </div>
-                    <button class="notification-bell glass" id="notifBell" aria-label="Notifications">
+                    <div class="notification-bell">
                         <i class="far fa-bell"></i>
-                        <span class="notif-dot" id="notifDot" hidden></span>
-                    </button>
+                        <span class="notif-dot"></span>
+                    </div>
                 </div>
             </header>
 
-            <!-- ====== HERO / FOCUS CARD ====== -->
-            <section class="hero-card glass">
-                <div class="hero-content">
-                    <div class="hero-icon-wrapper">
-                        <i class="fas fa-bullseye hero-icon"></i>
+            <!-- ====== FOCUS CARD ====== -->
+            <section class="focus-card">
+                <div class="focus-content">
+                    <div class="focus-icon-wrapper">
+                        <div class="focus-icon"><i class="fas fa-bullseye"></i></div>
                     </div>
-                    <div class="hero-info">
-                        <div class="hero-badge">Today's focus</div>
-                        <h2 id="focusTaskTitle">Client-Side Todo List App</h2>
-                        <div class="hero-meta">
+                    <div class="focus-info">
+                        <h3>Today's Focus</h3>
+                        <p>Client-Side Todo List App</p>
+                        <div class="focus-meta">
                             <span><i class="far fa-calendar-check"></i> Day 8</span>
-                            <span><i class="far fa-clock"></i> <span id="focusTaskCount">6</span> tasks remaining</span>
-                            <span id="focusDueMeta" hidden><i class="far fa-hourglass"></i> <span id="focusDueText"></span></span>
+                            <span class="focus-task-count" id="focusTaskCount">6 tasks remaining</span>
                         </div>
                     </div>
                 </div>
-                <div class="hero-progress">
-                    <div class="progress-ring-wrapper">
-                        <svg viewBox="0 0 120 120">
-                            <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(120,108,84,0.18)" stroke-width="8" />
-                            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--ring-stroke, #c7841e)" stroke-width="8"
-                                stroke-linecap="round"
-                                stroke-dasharray="314.159"
-                                stroke-dashoffset="314.159"
-                                id="focusRing" />
-                        </svg>
-                        <span class="hero-progress-text" id="focusPercent">0%</span>
-                    </div>
+                <div class="focus-progress-ring">
+                    <svg viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="50" fill="none" stroke="#eef2f8" stroke-width="8" />
+                        <circle cx="60" cy="60" r="50" fill="none" stroke="#4f46e5" stroke-width="8"
+                            stroke-linecap="round"
+                            stroke-dasharray="314.159"
+                            stroke-dashoffset="314.159"
+                            id="focusRing" />
+                    </svg>
+                    <span class="focus-ring-text" id="focusPercent">0%</span>
                 </div>
             </section>
 
-            <!-- ====== TABS + ADD BUTTON ====== -->
+            <!-- ====== TABS ====== -->
             <div class="tabs-container">
-                <div class="tabs glass" role="tablist">
-                    <button class="active" id="tabToday" role="tab" aria-selected="true"><i class="fas fa-list-ul"></i> All</button>
-                    <button id="tabUpcoming" role="tab" aria-selected="false"><i class="far fa-clock"></i> Pending</button>
-                    <button id="tabDone" role="tab" aria-selected="false"><i class="fas fa-check-circle"></i> Done</button>
+                <div class="tabs">
+                    <button class="active" id="tabToday"><i class="fas fa-list-ul"></i> All</button>
+                    <button id="tabUpcoming"><i class="far fa-clock"></i> Pending</button>
+                    <button id="tabDone"><i class="fas fa-check-circle"></i> Done</button>
                 </div>
-                <div class="tabs-right">
-                    <div class="search-box glass">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search tasks..." autocomplete="off" />
-                    </div>
-                    <button class="add-task-btn" id="addTaskBtn">
-                        <i class="fas fa-plus"></i> New Task
-                    </button>
-                </div>
+                <button class="add-task-btn" id="addTaskBtn"><i class="fas fa-plus"></i> New Task</button>
             </div>
 
             <!-- ====== TASK SECTION ====== -->
-            <section class="task-section glass">
+            <section class="task-section">
 
                 <!-- Quick Add -->
                 <div class="quick-add">
-                    <select id="quickPriority" title="Priority" aria-label="Priority">
-                        <option value="medium" selected>Medium</option>
-                        <option value="high">High</option>
-                        <option value="low">Low</option>
-                    </select>
-                    <input type="text" id="taskInput" placeholder="What's on your mind? Add a task..." autocomplete="off" />
-                    <button id="addQuickBtn" aria-label="Add task"><i class="fas fa-arrow-right"></i></button>
+                    <input type="text" id="taskInput" placeholder="What do you want to accomplish?" autocomplete="off" />
+                    <button id="addQuickBtn"><i class="fas fa-arrow-right"></i></button>
                 </div>
 
                 <!-- Task List -->
-                <div class="task-list" id="taskList" aria-live="polite"></div>
+                <div class="task-list" id="taskList"></div>
 
-                <!-- Footer Stats -->
+                <!-- Stats -->
                 <div class="task-footer">
                     <div class="task-stats">
                         <div class="stat-item">
@@ -169,7 +133,7 @@
 
             <!-- ====== REVIEW BUTTON ====== -->
             <div class="review-wrapper">
-                <button class="review-btn glass" id="reviewBtn">
+                <button class="review-btn" id="reviewBtn">
                     <i class="fas fa-thumbs-up"></i> I've Reviewed the Steps
                     <span class="review-badge" id="reviewBadge">0/6</span>
                 </button>
@@ -177,73 +141,16 @@
 
             <!-- ====== FOOTER ====== -->
             <footer class="app-footer">
-                <p>
-                    <i class="fas fa-heart"></i> Track your learning, one task at a time
-                </p>
+                <p>&copy; 2026 — Made with <i class="fas fa-heart"></i> by Chetana Gujare</p>
                 <div class="footer-links">
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
             </footer>
 
         </main>
     </div>
-
-    <!-- ====== NEW TASK MODAL ====== -->
-    <div class="modal-overlay" id="taskModalOverlay" hidden>
-        <div class="modal glass" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-            <div class="modal-header">
-                <h3 id="modalTitle">New task</h3>
-                <button class="modal-close" id="modalCloseBtn" aria-label="Close"><i class="fas fa-times"></i></button>
-            </div>
-            <form id="taskForm">
-                <label class="field-label" for="modalTaskTitle">Task title</label>
-                <input type="text" id="modalTaskTitle" placeholder="e.g. Build the login form" required autocomplete="off" />
-
-                <div class="field-row">
-                    <div class="field-col">
-                        <label class="field-label" for="modalPriority">Priority</label>
-                        <select id="modalPriority">
-                            <option value="low">Low</option>
-                            <option value="medium" selected>Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                    </div>
-                    <div class="field-col">
-                        <label class="field-label" for="modalDueDate">Due date</label>
-                        <input type="date" id="modalDueDate" />
-                    </div>
-                </div>
-
-                <label class="field-label" for="modalTags">Tags <span class="field-hint">(comma separated)</span></label>
-                <input type="text" id="modalTags" placeholder="e.g. JavaScript, Storage" autocomplete="off" />
-
-                <div class="modal-actions">
-                    <button type="button" class="btn-ghost" id="modalCancelBtn">Cancel</button>
-                    <button type="submit" class="btn-primary">Add task</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ====== CONFIRM MODAL ====== -->
-    <div class="modal-overlay" id="confirmOverlay" hidden>
-        <div class="modal modal-sm glass" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle">
-            <div class="modal-header">
-                <h3 id="confirmTitle">Delete all tasks?</h3>
-            </div>
-            <p class="confirm-text">This clears your whole list and can't be undone.</p>
-            <div class="modal-actions">
-                <button type="button" class="btn-ghost" id="confirmCancelBtn">Cancel</button>
-                <button type="button" class="btn-danger" id="confirmOkBtn">Delete all</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ====== TOASTS ====== -->
-    <div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
     <script src="script.js"></script>
 </body>
